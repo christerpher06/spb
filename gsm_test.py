@@ -63,7 +63,7 @@ def main():
     s = gsm_init()
 
     # Spam Charles with a text
-    gsm_send_sms(s, 14047961224, "Hi")
+    gsm_send_sms(s, 18433033157, "Hi")
 
 if __name__ == '__main__':
     main()
