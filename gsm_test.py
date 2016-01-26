@@ -11,14 +11,12 @@ def gsm_init():
     """
 
     print("Initialising Modem...")
-    serialport = serial.Serial("/dev/ttyAMA0", 115200, timeout=1)
+    serialport = serial.Serial("/dev/ttyAMA0", 115200, timeout=30)
 
     # The module sets the baudrate automatically based on the first message.
-    serialport.write("AT\r\n")
-    serialport.readlines()
-
-    serialport.write("ATE0\r\n")
-    serialport.readlines()
+    serialport.write("AT\n")
+    print(serialport.readline().strip())
+    print(serialport.readline().strip())
 
     return serialport
 
@@ -34,29 +32,22 @@ PHONE_NUMBER has no special formatting (10 digits).
     serialport = port
 
     # Sets GSM to "Text-Mode"
-    serialport.write("AT+CMGF=1\r\n")
-    response = serialport.readlines(None)
-    sleep(1)
-    print(response)
+    serialport.write("AT+CMGF=1\n")
+    print(serialport.readline().strip())
+    print(serialport.readline().strip())
 
     # Start of an SMS cmd
-    sms_cmd = 'AT+CMGS="{}"\r\n'.format(phone_number)
-    #print(sms_cmd)
-    serialport.write(sms_cmd)
-    response = serialport.readlines(None)
-    print(response)
-    sleep(1)
-
-    # Append the given message
-    msg_cmd = "{}\r\n".format(message)
-    print(msg_cmd)
-    serialport.write(msg_cmd)
-
+    sms_cmd = 'AT+CMGS="{}"\n'.format(phone_number)
     # ASCII ctrl+z signals the end of the text
-    serialport.write("\x1A")
+    sms_cmd += "{}\x1A".format(message)
+    serialport.write(sms_cmd)
+
     sleep(30)    # Sometimes takes a while to send
-    response = serialport.readlines(None)
-    print(response)
+    print(serialport.readline().strip())
+    print(serialport.readline().strip())
+    print(serialport.readline().strip())
+    print(serialport.readline().strip())
+    print(serialport.readline().strip())
 
 
 def main():
