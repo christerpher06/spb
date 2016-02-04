@@ -1,0 +1,14 @@
+gsm_test.py
+Sends SMS text
+
+
+ir_test.py
+Testing IR break beam.  (To be removed)
+
+
+led.py
+Testing writing to GPIO.
+
+
+readmifare.py
+When run, waits for RFID card and texts before exiting program.
