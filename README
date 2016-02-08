@@ -1,3 +1,6 @@
+====================
+Programs
+====================
 gsm_test.py
 Sends SMS text
 
@@ -12,3 +15,16 @@ Testing writing to GPIO.
 
 readmifare.py
 When run, waits for RFID card and texts before exiting program.
+
+
+====================
+GPIO Pins
+====================
+PN532
+CS = 18
+MOSI = 23
+MISO = 24
+SCLK = 25
+
+Misc
+LED = 17
